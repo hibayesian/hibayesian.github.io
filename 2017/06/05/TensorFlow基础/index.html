@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="hibayesian" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="hibayesian，算法工程师，关注机器学习与深度学习，电子邮箱：hibayesian@gmail.com。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Welcome!">
+<meta property="og:url" content="https://hibayesian.github.io/about/index.html">
+<meta property="og:site_name" content="hibayesian">
+<meta property="og:description" content="hibayesian，算法工程师，关注机器学习与深度学习，电子邮箱：hibayesian@gmail.com。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-07T13:26:42.356Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Welcome!">
+<meta name="twitter:description" content="hibayesian，算法工程师，关注机器学习与深度学习，电子邮箱：hibayesian@gmail.com。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://hibayesian.github.io/about/"/>
+
+
+
+
+
+  <title>TensorFlow基础 | hibayesian</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">hibayesian</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+
+            
+              首页
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+
+            
+              分类
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+
+            
+              归档
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+
+            
+              关于
+            
+
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hibayesian.github.io/2017/06/05/TensorFlow基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hibayesian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hibayesian">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TensorFlow基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-05T21:15:17+08:00">2017-06-05</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="TensorFlow基础"><a href="#TensorFlow基础" class="headerlink" title="TensorFlow基础"></a>TensorFlow基础</h3><p>　　TensorFlow是由Google公司开源的机器学习计算框架。本章将对TensorFlow的基本概念和模型架构进行介绍。</p>
+<h3 id="1-数据流图"><a href="#1-数据流图" class="headerlink" title="1 - 数据流图"></a>1 - 数据流图</h3><p>　　数据流图是TensorFlow的核心概念。在所有机器学习算法执行之前，TensorFlow可将其抽象表示成<em>数据流图</em>(dataflow graph)。TensorFlow中的数据流图是有向图，由<em>顶点</em>和<em>边</em>组成。其中，顶点表示一个局部的计算单元，通常是指<em>操作</em>(operation)；边表示顶点的输入或输出，通常是指<em>张量</em>(tensor)。</p>
+<a id="more"></a>
+<p>　　在TensorFlow中，张量是n-维的数组。将张量的维度定义为<em>阶</em>(rank)，张量的大小定义为<em>形状</em>(shape)。从数学角度来说，张量是对标量(0-阶张量)、向量(1-阶张量)、矩阵(2-阶张量)的扩展。在数据流图中，张量本质上是符号句柄(symbolic handle)，本身并不存储任何数据，仅仅是数据的引用(reference)。</p>
+<p>　　在TensorFlow中，可以将操作理解为函数，具体可指<em>数学公式</em>、<em>变量</em>(variable)、<em>占位符</em>(placeholder)、<em>常量</em>(constant)、<em>队列</em>(queue)等。操作允许有零个或多个张量作为输入，完成指定的计算后，产生零个或多个张量作为输出。在一些特定情况下，例如执行随机梯度下降算法时，整个数据流图可能会被迭代地执行多次。但是，所有张量无法在两次迭代过程中进行传递。因此，通常会将诸如神经网络中的权重、偏置值等定义为变量。变量可持久化到内存中，并不会在迭代过程中被销毁。有些变量的值只有当数据流图执行时，由用户来给定。此时，可以将其定义为占位符。通过使用队列，可使得数据流图异步执行。</p>
+<p>　　与操作密切相关的一个概念是<em>核</em>(kernel)。核是操作在某种特定<em>设备</em>(device)上的实现。设备是TensorFlow的计算核心。所有数据流图中的顶点都必须对应到一个可用的设备上来执行。除了常见的CPU或GPU，TensorFlow还允许用户注册新的设备。例如，Google在2016年5月新添加了Tensor Processing Unit(TPU)，一种专门为快速完成张量计算的物理执行单元。</p>
+<p>　　数据流图中所有操作和张量都需要在一个特殊的环境中执行，TensorFlow将其称之为<em>会话</em>(session)。会话提供了<code>run()</code>方法，可将输入数据“喂”(feed)给数据流图中的操作，并将最终的计算结果“带”(fetch)回来。</p>
+<div align="center"><img src="dataflow.png" width="200" alt="1.1" align="center"></div><br><div align="center">图1 - 数据流图</div>
+
+
+<p>　　图1是一张构建完成后的数据流图。其中，圆形表示变量，圆角矩形表示机器学习中常见的数学计算，带箭头的边表示张量。</p>
+<h3 id="2-集群架构"><a href="#2-集群架构" class="headerlink" title="2 - 集群架构"></a>2 - 集群架构</h3><p>　　TensorFlow集群由<em>客户端</em>（client）、<em>主节点</em>（master），以及多个<em>工作节点</em>（worker）组成。</p>
+<ul>
+<li>客户端</li>
+</ul>
+<p>　　用户通过客户端构建数据流图，并通过会话接口向主节点发送执行请求。客户端一般由Python或C++实现。一个客户端往往可以与多个TensorFlow集群通信。同时，一个TensorFlow集群也可以与多个客户端通信。</p>
+<ul>
+<li>主节点</li>
+</ul>
+<p>　　主节点提供RPC服务，接收来自客户端的执行请求。同时，作为代理，将任务分配给工作节点，并负责协调工作节点的执行。</p>
+<ul>
+<li>工作节点</li>
+</ul>
+<p>　　工作节点一般包含一个或多个设备，并负责监督这些设备执行数据流图的一部分。</p>
+<p>　　TensorFlow将所要执行的计算按照cluster、job、task三个粒度进行划分。cluster包含一系列的job，job由一系列的task组成。其中，cluster一般指完成相对高层次的目标，比如，训练一个神经网络。job的目标则相对更低层次，比如，为了完成训练一个神经网络，需要有一部分工作节点作为<em>参数服务器</em>(parameter server)，另一部分工作节点则完成无状态(stateless)的高强度计算任务。task受TensorFlow Server进程管控，负责完成job的计算任务。TensorFlow采用了客户端/服务器(C/S)模式，主节点和工作节点的进程均可认为是服务器端。</p>
+<p>　　TensorFlow系统可分为单机(local)和分布式(distributed)两种架构。其中，单机又可以进一步分为单设备(single-device)和多设备(multi-device)。</p>
+<div align="center"><img src="architecture.png" width="680" alt="1.1" align="center"></div><br><div align="center">图2 - 单机与分布式集群架构</div>
+
+
+<h3 id="3-执行模型"><a href="#3-执行模型" class="headerlink" title="3 - 执行模型"></a>3 - 执行模型</h3><p>　　当用户在客户端程序中完成数据流图的构建后，通过调用会话中的run()方法，TensorFlow集群才开始执行计算。对于数据流图，TensorFlow支持<em>部分执行</em>(partitial execution)。虽然用户在客户端中定义了完整的数据流图，但是，TensorFlow允许用户执行数据流图的子图。主节点根据用户在run()方法中传入的参数，从数据流图中找到用户指定的输出顶点，并进行反向遍历，根据依赖关系查找所有与该输出顶点相关的顶点，称之为<em>最小子图</em>。将这样的一次调用，称之为<em>步骤</em>(step)。TensorFlow支持同时并发(concurrently)执行多个步骤。如图3所示，用户指定求解输出顶点f的值，TensorFlow将查找其所对应的最小子图<code>a -&gt; c -&gt; f</code>。</p>
+<div align="center"><img src="partitial_execution.png" width="400" alt="1.1" align="center"></div><br><div align="center">图3 - 部分执行</div>
+
+<p>　　从上一节可知，TensorFlow集群中一般包含多个设备。那么，如何将数据流图切分，分配给各个设备进行计算呢？TensorFlow中采用了安置(placement)算法来解决这个问题。首先，安置算法模拟执行一次最小子图。根据启发式策略对数据流图中各个顶点的输入、输出数据量进行估计。然后，进一步估计每一个顶点的计算时间。在这个过程中，TensorFlow可将最小子图进一步切分为子图片段，并为子图片段挑选合适的设备。安置算法的好坏，直接决定了每一个工作节点的计算量是否平衡，从而对TensorFlow集群的执行效率有着非常重要的影响。目前，Google也正在不断改进该算法。最后，主节点将所有子图片段发送到各个工作节点。工作节点才开始子图片段的计算过程。</p>
+<div align="center"><img src="send_recv.png" width="400" alt="1.1" align="center"></div><br><div align="center">图4 - send节点和recv节点</div>
+
+
+<p>　　如图4所示，当安置算法完成子图片段的划分后，子图片段被分配到各个设备上进行计算。因此，原数据流图中的横跨不同设备的边将被send节点和recv节点所取代。send节点和recv节点分别负责发送和接收不同设备上的数据。值得注意的是，并不是每一条横跨不同设备的边都会新添一个send节点或recv节点。对于多个顶点的输入是同一个张量的情况，TensorFlow进行了优化，此时，多个顶点将共享一个send节点或recv节点。如图4所示，a和b、a和c节点之间的边将共享同一个recv节点。</p>
+<h3 id="4-第一个TensorFlow程序"><a href="#4-第一个TensorFlow程序" class="headerlink" title="4 - 第一个TensorFlow程序"></a>4 - 第一个TensorFlow程序</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义变量w</span></span><br><span class="line">w = tf.Variable(tf.random_uniform([<span class="number">1</span>], <span class="number">-0.1</span>, <span class="number">0.1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义占位符x和b</span></span><br><span class="line">x = tf.placeholder(<span class="string">"float"</span>)</span><br><span class="line">b = tf.placeholder(<span class="string">"float"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># y = sigmoid(w * x + b)</span></span><br><span class="line">y = tf.nn.sigmoid(tf.add(tf.mul(w, x), b))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">sess = tf.Session()</span><br><span class="line">sess.run(init)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行计算</span></span><br><span class="line">res = sess.run(y, feed_dict=&#123;x: <span class="number">1</span>, b: <span class="number">2</span>&#125;)</span><br><span class="line">print(res)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭Session，释放资源</span></span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输出：</span><br><span class="line">[ 0.87484437]</span><br></pre></td></tr></table></figure>
+<div align="center"><img src="first_program.png" width="200" alt="1.1" align="center"></div><br><div align="center">图5 - 第一个TensorFlow程序</div>
+
+<p>　　图5是上述程序的数据流图。第一个TensorFlow程序是计算公式<code>y = sigmoid(w * x + b)</code>的值。其中，w是变量，w的值是通过<code>tf.random_uniform()</code>方法在[-0.1, 0.1]之间随机取值。x和b是占位符，只有当用户调用会话的<code>run()</code>方法时，才由用户通过<code>feed_dict()</code>参数给定。在TensorFlow中，操作是可以自由嵌套的。例如，y将<code>tf.mul</code>、<code>tf.add()</code>、<code>tf.nn.sigmoid()</code>嵌套在一起，使得代码更加紧凑。</p>
+<p>　　很多第一次接触TensorFlow的同学，可能都会有一个疑问，为什么需要<code>init = tf.global_variables_initializer()</code>这样一行代码？其实，这是因为避免变量在上一次迭代时产生的计算结果影响当前迭代。因此，对在定义数据流图中变量的同时，需要定义一个初始程序(initilizer)。数据流图中的变量在执行之前都必须调用初始程序进行初始化。初始程序也是一种操作，TensorFlow通过初始程序，可将初始值赋值(assign)给该变量，从而可以推断该变量的形状和数据类型。</p>
+<div align="center"><img src="initializer.png" width="180" alt="1.1" align="center"></div><br><div align="center">图6 - 初始化变量</div>
+
+<p>　　图6是初始化变量的过程。用户定义变量<code>v</code>的同时，给出了初始值<code>i</code>。通过执行<code>init = tf.global_variables_initializer()</code>和<code>sess.run(init)</code>来对变量进行初始化，而不会执行数据流图的其他部分。这正是应用了之前提到过的部分执行特性。</p>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5 - 总结"></a>5 - 总结</h3><p>　　为方便读者理解接下来几章的内容，本章对TensorFlow的基本概念和模型架构进行了介绍。如果想了解更多TensorFlow的技术细节，可以进一步参考<em>拓展阅读</em>这一节的资料。</p>
+<h3 id="6-拓展阅读"><a href="#6-拓展阅读" class="headerlink" title="6 - 拓展阅读"></a>6 - 拓展阅读</h3><ol>
+<li>TensorFlow White Paper: <a href="http://download.tensorflow.org/paper/whitepaper2015.pdf" target="_blank" rel="noopener">http://download.tensorflow.org/paper/whitepaper2015.pdf</a></li>
+<li>A Tour of TensorFlow: <a href="https://arxiv.org/pdf/1610.01178.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1610.01178.pdf</a></li>
+<li>TensorFlow架构与设计，刘光聪：<a href="http://www.jianshu.com/p/a5574ebcdeab" target="_blank" rel="noopener">http://www.jianshu.com/p/a5574ebcdeab</a></li>
+<li>A Practical Guide for Debugging TensorFlow Codes: <a href="https://github.com/wookayin/tensorflow-talk-debugging" target="_blank" rel="noopener">https://github.com/wookayin/tensorflow-talk-debugging</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/04/关联规则挖掘基础/" rel="next" title="关联规则挖掘基础">
+                <i class="fa fa-chevron-left"></i> 关联规则挖掘基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">hibayesian</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TensorFlow基础"><span class="nav-number">1.</span> <span class="nav-text">TensorFlow基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据流图"><span class="nav-number">2.</span> <span class="nav-text">1 - 数据流图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-集群架构"><span class="nav-number">3.</span> <span class="nav-text">2 - 集群架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-执行模型"><span class="nav-number">4.</span> <span class="nav-text">3 - 执行模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-第一个TensorFlow程序"><span class="nav-number">5.</span> <span class="nav-text">4 - 第一个TensorFlow程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-总结"><span class="nav-number">6.</span> <span class="nav-text">5 - 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-拓展阅读"><span class="nav-number">7.</span> <span class="nav-text">6 - 拓展阅读</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hibayesian</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
